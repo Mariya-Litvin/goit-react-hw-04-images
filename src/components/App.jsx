@@ -56,35 +56,6 @@ export const App = () => {
     }
   }, [searchQuery, page]);
 
-  // useEffect(() => {
-  //   const options = {
-  //     searchQuery: searchQuery,
-  //     page: page,
-  //   };
-  //   if (page !== 1) {
-  //     async function getImages() {
-  //       try {
-  //         const response = await resultSearch(options);
-  //         const arr = response.hits.map(el => ({
-  //           tags: el.tags,
-  //           webformatURL: el.webformatURL,
-  //           largeImageURL: el.largeImageURL,
-  //           id: el.id,
-  //         }));
-  //         setArticles(prev => [...prev, ...arr]);
-  //         setIsLoading(false);
-  //       } catch (error) {
-  //         setIsLoading(false);
-  //         Notiflix.Notify.failure(
-  //           'Sorry, something went wrong, please try again later',
-  //           error
-  //         );
-  //       }
-  //     }
-  //   }
-  //   getImages();
-  // }, [page, searchQuery]);
-
   const handleSubmit = name => {
     if (name !== searchQuery && name) {
       setSearchQuery(name);
