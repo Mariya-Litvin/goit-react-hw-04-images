@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 import {
   SeachField,
   SeachForm,
@@ -9,42 +9,39 @@ import {
 } from './Seachbar.styled';
 import { IoSearchSharp } from 'react-icons/io5';
 
-export class Searchbar extends Component {
-  state = {
-    name: '',
+export const Searchbar = ({ onSubmit }) => {
+  const [name, setName] = useState('');
+
+  const handleChange = evt => {
+    setName(evt.target.value.trim());
   };
 
-  handleChange = evt => {
-    this.setState({ name: evt.target.value.trim() });
-  };
-
-  onFormSubmit = e => {
+  const onFormSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    onSubmit(name);
   };
 
-  render() {
-    return (
-      <SeachField>
-        <SeachForm onSubmit={this.onFormSubmit}>
-          <SearchButton type="submit">
-            <IoSearchSharp size="27px" />
-            <SearchLabel>Search</SearchLabel>
-          </SearchButton>
+  return (
+    <SeachField>
+      <SeachForm onSubmit={onFormSubmit}>
+        <SearchButton type="submit">
+          <IoSearchSharp size="27px" />
+          <SearchLabel>Search</SearchLabel>
+        </SearchButton>
 
-          <SearchInput
-            type="text"
-            // autocomplete="off"
-            // autofocus
-            placeholder="Search images and photos"
-            onChange={this.handleChange}
-            value={this.state.name}
-          />
-        </SeachForm>
-      </SeachField>
-    );
-  }
-}
+        <SearchInput
+          type="text"
+          // autocomplete="off"
+          // autofocus
+          placeholder="Search images and photos"
+          onChange={handleChange}
+          value={name}
+        />
+      </SeachForm>
+    </SeachField>
+  );
+};
+
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
